@@ -12,8 +12,6 @@ pipeline {
         stage('Push') {
             steps {
                 sh '''
-                docker stop task1
-                docker rm task1
                 docker push renjubino/task1jenk
                 '''
             }
@@ -22,8 +20,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                docker stop task1
-                docker rm task1
+                //docker stop task1
+                //docker rm task1
                 docker run -d -p 80:5500 --name task1 renjubino/task1jenk
                 '''
             }
