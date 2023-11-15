@@ -12,6 +12,8 @@ pipeline {
         stage('Push') {
             steps {
                 sh '''
+                docker stop task1
+                docker rm task1
                 docker push renjubino/task1jenk
                 '''
             }
