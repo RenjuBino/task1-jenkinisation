@@ -24,7 +24,7 @@ pipeline {
                 sh '''
                 ssh jenkins@renju-deploy <<EOF
                 docker network rm task1-net && echo "Removed network" || echo "task1-net network not available"
-                docker netword create task1-net
+                docker network create task1-net
                 docker stop nginx && echo "Stopped nginx" || echo "nginx not running"
                 docker rm nginx && echo "Removed nginx" || echo "nginx not available"
                 docker stop flask-app && echo "Stopped flask-app" || echo "flask-app not running"
