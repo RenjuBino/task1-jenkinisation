@@ -38,7 +38,7 @@ pipeline {
                 docker network rm task1-net && echo "Removed network" || echo "task1-net network not available"
                 docker network create task1-net
                 docker pull renjubino/task1jenk
-                docker pull task1-nginx
+                docker pull renjubino/task1-nginx
                 docker run -d --name flask-app3 --network task1-net -e YOUR_NAME=${YOUR_NAME} renjubino/task1jenk
                 docker run -d --name flask-app1 --network task1-net -e YOUR_NAME=flask2 renjubino/task1jenk
                 docker run -d --name flask-app2 --network task1-net -e YOUR_NAME=flask3 renjubino/task1jenk
