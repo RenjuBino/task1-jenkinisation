@@ -27,7 +27,7 @@ pipeline {
                 sh '''
                 ssh jenkins@renju-deploy <<EOF
                 export YOUR_NAME = ${YOUR_NAME}
-                               docker stop nginx && echo "Stopped nginx" || echo "nginx not running"
+                docker stop nginx && echo "Stopped nginx" || echo "nginx not running"
                 docker rm nginx && echo "Removed nginx" || echo "nginx not available"
                 docker stop flask-app3 && echo "Stopped flask-app3" || echo "flask-app3 not running"
                 docker rm flask-app3 && echo "Removed flask-app3" || echo "flask-app3 not available"
