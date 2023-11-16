@@ -31,8 +31,8 @@ pipeline {
                 docker network create task1-net
                 docker stop nginx && echo "Stopped nginx" || echo "nginx not running"
                 docker rm nginx && echo "Removed nginx" || echo "nginx not available"
-                docker stop flask-app && echo "Stopped flask-app" || echo "flask-app not running"
-                docker rm flask-app && echo "Removed flask-app" || echo "flask-app not available"
+                docker stop flask-app3 && echo "Stopped flask-app3" || echo "flask-app3 not running"
+                docker rm flask-app3 && echo "Removed flask-app3" || echo "flask-app3 not available"
                 docker stop flask-app1 && echo "Stopped flask-app1" || echo "flask-app1 not running"
                 docker rm flask-app1 && echo "Removed flask-app1" || echo "flask-app1 not available"
                 docker stop flask-app2 && echo "Stopped flask-app2" || echo "flask-app2 not running"
