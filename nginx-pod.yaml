@@ -13,7 +13,7 @@ spec:
   - image: nginx:alpine
     name: nginx
     volumeMounts:
-    - name: nginx-mount
+    - name: nginx-vol
       mountPath: /etc/nginx
 ---
 apiVersion: v1
