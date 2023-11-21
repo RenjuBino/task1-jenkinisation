@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app
+spec:
+  ports:
+  - port: 5500
+    protocol: TCP
+    targetPort: 5500
+  selector:
+    app: flask
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: flask
+  name: flask
+spec:
+  containers:
+  - image: renjubino/task1jenk:latest
+    name: flask
+    env:
+    - name: YOUR_NAME
+      value: RENJUBINO
+    ports:
+    - containerPort: 5500
