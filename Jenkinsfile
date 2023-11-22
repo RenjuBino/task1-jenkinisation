@@ -23,7 +23,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                kubectl apply -f .
+                sed -e 's,{{yourname}},'${YOUR_NAME}',g;' your-name.yaml | kubectl apply -f -
+                kubectl apply -f flask-pod-manifest.yaml
                 sleep 60
                 kubectl get services
                 '''
