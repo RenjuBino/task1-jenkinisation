@@ -23,6 +23,6 @@ spec:
     name: flask
     env:
     - name: YOUR_NAME
-      value: RENJUBINO
+      value: RENJUVARGHESE
     ports:
     - containerPort: 5500
