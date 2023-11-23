@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                docker build -t renjubino/task1jenk .
+                docker build -t renjubino/task1jenk:v${BUILD_NUMBER} .
                 '''
             }
 
@@ -15,7 +15,7 @@ pipeline {
         stage('Push') {
             steps {
                 sh '''
-                docker push renjubino/task1jenk
+                docker push renjubino/task1jenk:v${BUILD_NUMBER}
                 '''
             }
 
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh '''
                 kubectl apply -f nginx-config.yaml --namespace staging
-                sed -e 's,{{YOUR_NAME}},'${YOUR_NAME}',g;' flask-pod-manifest.yaml | kubectl apply -f - --namespace staging
+                sed -e 's,{{YOUR_NAME}},'${YOUR_NAME}',g;' -e 's,{{version}},'${BUILD_NUMBER}',g;' flask-pod-manifest.yaml | kubectl apply -f - --namespace staging
                 kubectl apply -f nginx-pod.yaml --namespace staging
                 '''
             }
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 sh '''
                 kubectl apply -f nginx-config.yaml --namespace prod
-                sed -e 's,{{YOUR_NAME}},'${YOUR_NAME}',g;' flask-pod-manifest.yaml | kubectl apply -f - --namespace prod
+                sed -e 's,{{YOUR_NAME}},'${YOUR_NAME}',g;' -e 's,{{version}},'${BUILD_NUMBER}',g;' flask-pod-manifest.yaml | kubectl apply -f - --namespace prod
                 kubectl apply -f nginx-pod.yaml --namespace prod
                 sleep 60
                 kubectl get services --namespace prod
