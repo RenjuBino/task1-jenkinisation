@@ -11,21 +11,33 @@ spec:
     app: flask
   type: LoadBalancer
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  labels:
-    app: flask
   name: flask
 spec:
-  containers:
-  - image: renjubino/task1jenk:latest
-    name: flask
-    env:
-    - name: YOUR_NAME
-      valueFrom:
-        secretKeyRef:
-          name: your-name
-          key: yourname
-    ports:
-    - containerPort: 5500
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+  template:
+    metadata:
+      labels:
+        app: flask
+      name: flask
+    spec:
+      containers:
+      - image: renjubino/task1jenk:latest
+        name: flask
+        env:
+          - name: YOUR_NAME
+          valueFrom:
+            secretKeyRef:
+              name: your-name
+              key: yourname
+        ports:
+        - containerPort: 5500
