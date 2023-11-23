@@ -35,9 +35,10 @@ spec:
         name: flask
         env:
           - name: YOUR_NAME
-          valueFrom:
-            secretKeyRef:
-              name: your-name
-              key: yourname
+            #valueFrom:
+            #  secretKeyRef:
+            #    name: your-name
+            #    key: yourname
+            value: {{YOUR_NAME}}
         ports:
         - containerPort: 5500
